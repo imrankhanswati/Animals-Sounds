@@ -20,6 +20,11 @@ public class UIController : MonoBehaviour
     [SerializeField] private Text objectName;
     [SerializeField] private GameObject[] panels;
 
+    [Header("Scrolling buttons Repfrences")]
+    [SerializeField] private Image[] typesBtnsImgs;
+    [SerializeField] private Sprite[] typesBtnsNotSelectedSprites;
+    [SerializeField] private Sprite[] typesBtnsSelectedSprites;
+
     private void Awake()
     {
         instance = this;
@@ -45,17 +50,23 @@ public class UIController : MonoBehaviour
             if (i == panelIndex)
             {
                 panels[i].SetActive(true);
+                typesBtnsImgs[i].sprite = typesBtnsSelectedSprites[i];
             }
             else
             {
                 panels[i].SetActive(false);
+                typesBtnsImgs[i].sprite = typesBtnsNotSelectedSprites[i];
             }
         }
     }
 
-    public void ChaneObjectMainImg(Sprite sprite,string name)
+    public void ChaneObjectMainImg(Sprite sprite, string name)
     {
         objectMainImg.sprite = sprite;
-        objectName.text = name;
+        objectName.text = char.ToUpper(name[0]).ToString();
+        for (int i = 1; i < name.Length; i++)
+        {
+            objectName.text += name[i];
+        }
     }
 }
