@@ -13,23 +13,17 @@ public class AdsController : MonoBehaviour
     {
         instance = this;
         admob = GetComponent<AdmobControllerScript>();
-    }
-
-    public void ShowBanner()
-    {
         admob.RequestBanner();
     }
 
-    public void HideBanner()
-    {
-        admob.HideBanner();
-    }
-
-    public void ShowIntertitial()
+    public bool ShowIntertitial()
     {
         if (admob.IsIntersititialAdLoaded())
         {
             admob.ShowInterstitial();
+            admob.RequestInterstitial();
+            return true;
         }
+        return false;
     }
 }

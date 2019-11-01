@@ -5,6 +5,7 @@ using UnityEngine;
 public class AnimalsDataBase : MonoBehaviour
 {
     [SerializeField] private Animal[] animalsDataBase;
+    private int adCounter=0;
 
     private void Start()
     {
@@ -15,6 +16,15 @@ public class AnimalsDataBase : MonoBehaviour
     {
         AudioController.instance.PlayClip(animalsDataBase[objectIndex].animalClip);
         UIController.instance.ChaneObjectMainImg(animalsDataBase[objectIndex].animalSprite, animalsDataBase[objectIndex].name);
+        adCounter++;
+
+        if(adCounter >= 5)
+        {
+            if (AdsController.instance.ShowIntertitial())
+            {
+                adCounter = 0;
+            }
+        }
     }
 }
 
